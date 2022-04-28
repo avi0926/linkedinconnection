@@ -1,0 +1,123 @@
+const puppeteer = require("puppeteer");
+const mail = "shruti.798.singh@gmail.com";
+const pass = "shruti@2804";
+// const search = "infosys";
+
+(async function () {
+    let browser = await puppeteer.launch({ headless: false, defaultViewport: null, args: ['--start-fullscreen'] });
+    let page = await browser.newPage();
+    await page.goto('https://www.linkedin.com/');
+    await page.waitForSelector(".input__input");
+    await page.type("#session_key", mail,{delay:100});
+    await page.type("#session_password", pass,{delay:100});
+    await page.click('button[data-tracking-control-name="homepage-basic_signin-form_submit-button"]');
+    await waitAndClick("#ember18", page);
+
+    await page.waitForTimeout(1000);
+    await page.waitForSelector('.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view.full-width'); 
+    await page.evaluate(function(){
+        let allButtonOnPage = document.querySelectorAll('.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view.full-width');
+        console.log(allButtonOnPage.length);
+        for(let i=0;i<allButtonOnPage.length;i++){
+            let send = allButtonOnPage[i];
+            send.click();
+        }
+        return;
+    });  
+})();
+
+
+// await page.type(".search-global-typeahead__input.always-show-placeholder", search);
+    // await page.keyboard.press('Enter');
+    // await waitAndClick(".search-reusables__primary-filter button", page);
+
+    // await clickConnect(page)
+
+// await page.waitForSelector('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view full-width',{dalay: 1000});
+    // await page.evaluate(function(){
+    //     let aTags = document.querySelectorAll('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view full-width');
+    //     let allButtonOnPage = document.querySelectorAll('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view full-width');
+    //     console.log(allButtonOnPage.length);
+    //     for(let i=0;i<allButtonOnPage.length;i++){
+    //         let send = allButtonOnPage[i];
+    //         send.click();
+    //     }
+        // for(let i=0;i<aTags.length;i++){
+        //     let link =  aTags[i].href;
+        //     console.log(link);
+        //     arr.push(link);
+        // }
+        // return arr;
+    // })
+
+async function waitAndClick(selector, page) {
+    await page.waitForSelector(selector);
+    await page.click(selector);
+}
+
+// let a=0;
+
+// async function clickConnect(page){
+//     await page.waitForTimeout(1000);
+//     await page.waitForSelector('.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view.full-width');
+//     await page.evaluate(function(){
+//         let allButtonOnPage = document.querySelectorAll('.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view full-width');
+//         console.log(allButtonOnPage.length);
+//         for(let i=0;i<allButtonOnPage.length;i++){
+//             let send = allButtonOnPage[i];
+//             send.click();
+//         }
+//     })
+// }
+
+// async function clickConnect(page) {
+    // await page.waitForTimeout(1000);
+    // await page.waitForSelector('.reusable-search__result-container button', { delay: 1000 })
+    // let data = await page.evaluate(async () => {
+
+    //     let allButtonOnPage = document.querySelectorAll('.reusable-search__result-container button')
+    //     console.log(allButtonOnPage.length)
+    //     let i=0;
+
+    //     await clickAndModalhandle(i)
+    //     async function clickAndModalhandle(i){
+    //         console.log(i)
+    //         if(i==allButtonOnPage.length-1){
+    //             return;
+    //         }
+    //         const element = allButtonOnPage[i]
+    //         setTimeout(()=>{},1000)
+    //         element.click();  
+    //         let button =  document.querySelector('[class="artdeco-button artdeco-button--2 artdeco-button--primary ember-view ml1"]')            
+    //         console.log(button)
+    //         if(button){
+    //             console.log('--------------')
+    //             let sendBox =  document.querySelector('[class="artdeco-button artdeco-button--2 artdeco-button--primary ember-view ml1"]')
+    //             setTimeout(()=>{},1000)
+    //            await sendBox.click()
+    //         }
+    //         i++
+    //         setTimeout(()=>{},1000)
+    //       await clickAndModalhandle(i)
+
+
+
+    //     }
+      
+
+        // async function clickonsend(selector, page) {
+        //     console.log(selector);
+        // }
+      
+        // a++
+        // [id="ember514"] click -
+
+        // if(a<5){
+        //         return 
+        // }
+        // clickConnect(page)
+        // return JSON.stringify({allButtonOnPage})
+
+    // })
+// }
+
